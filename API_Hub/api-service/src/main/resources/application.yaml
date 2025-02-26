@@ -1,0 +1,68 @@
+server:
+  port: 8103
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: api-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8090
+      http-method-specify: true
+#      server-addr: 8.130.35.69:8848 # nacos地址
+#      username: nacos
+#      password: Jimmy@2333
+  redis:
+    database: 6
+    host: 8.130.35.69
+    port: 6379
+    timeout: 5000
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+    password: Jimmy@2333
+  rabbitmq:
+    host: 8.130.35.69
+    port: 5672
+    virtual-host: /apiHub
+    username: hekmatyar
+    password: Jimmy@2333
+    connection-timeout: 500ms
+    template:
+      retry:
+        enabled: true # 设置MQ的连接超时时间
+        multiplier: 2    # 失败后下次的等待时长倍数，下次等待时长 = initial-interval * multiplier
+        max-attempts: 3 # 最大重试次数
+        initial-interval: 1000ms # 失败后的初始等待时间
+feign:
+  okhttp:
+    enabled: true # 开启OKHttp功能
+  sentinel:
+    enabled: true # 开启feign对sentinel的支持
+logging:
+  level:
+    com.apihub: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
+  file:
+    path: "logs/${spring.application.name}"
+knife4j:
+  enable: true
+  openapi:
+    title: api-service
+    description: "接口调用服务-接口文档"
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.apihub.api.controller

@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "name": "apihub.client"
+    }
+  ],
+  "properties": [
+    {
+      "name": "apihub.client.access-key",
+      "type": "java.lang.String",
+      "description": "用户accessKey"
+    },
+    {
+      "name": "apihub.client.secret-key",
+      "type": "java.lang.String",
+      "description": "用户secretKey"
+    },
+    {
+      "name": "apihub.client.api-token",
+      "type": "java.lang.String",
+      "description": "自营接口token"
+    }
+  ],
+  "hints": []
+}

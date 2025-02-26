@@ -1,0 +1,29 @@
+[
+  {
+    "id": "user",
+    "predicates": [{
+      "name": "Path",
+      "args": {"_genkey_0":"/api/user/**", "_genkey_1":"/api/userRPC/**"}
+    }],
+    "filters": [],
+    "uri": "lb://user-service"
+  },
+  {
+    "id": "interfaceInfo",
+    "predicates": [{
+      "name": "Path",
+      "args": {"_genkey_0":"/api/interfaceInfo/**"}
+    }],
+    "filters": [],
+    "uri": "lb://interfaceInfo-service"
+  },
+  {
+    "id": "api-service",
+    "predicates": [{
+      "name": "Path",
+      "args": {"_genkey_0":"/api/apiService/**"}
+    }],
+    "filters": [],
+    "uri": "lb://api-service"
+  }
+]

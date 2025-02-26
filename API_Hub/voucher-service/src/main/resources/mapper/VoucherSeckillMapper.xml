@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apihub.voucher.mapper.VoucherSeckillMapper">
+
+    <resultMap id="BaseResultMap" type="com.apihub.voucher.model.entity.VoucherSeckill">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="voucherId" column="voucherId" jdbcType="BIGINT"/>
+        <result property="stock" column="stock" jdbcType="INTEGER"/>
+        <result property="beginTime" column="beginTime" jdbcType="TIMESTAMP"/>
+        <result property="endTime" column="endTime" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="otherInfo" column="otherInfo" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,voucherId,stock,
+        beginTime,endTime,createTime,
+        updateTime,remark,otherInfo,
+        isDelete
+    </sql>
+</mapper>

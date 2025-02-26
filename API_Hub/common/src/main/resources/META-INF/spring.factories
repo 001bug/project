@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.apihub.common.exception.GlobalExceptionHandler,\
+  com.apihub.common.config.MvcConfig
+
+# ToDo 跨域在此添加配置
+#  com.apihub.common.config.JsonConfig,\
+#  com.apihub.common.config.MyBatisConfig,\

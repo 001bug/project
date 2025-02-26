@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/API_Hub/api-SDK/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/api-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/gateway-cors/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/interfaceInfo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/pay-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/user-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Hub/voucher-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>

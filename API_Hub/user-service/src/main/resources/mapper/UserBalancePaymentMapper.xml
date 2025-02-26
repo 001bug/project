@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apihub.user.mapper.UserBalancePaymentMapper">
+
+    <resultMap id="BaseResultMap" type="com.apihub.user.model.entity.UserBalancePayment">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="balance" column="balance" jdbcType="BIGINT"/>
+            <result property="frozenAmount" column="frozenAmount" jdbcType="BIGINT"/>
+            <result property="score" column="score" jdbcType="BIGINT"/>
+            <result property="expenseAmount" column="expenseAmount" jdbcType="BIGINT"/>
+            <result property="expenseScore" column="expenseScore" jdbcType="BIGINT"/>
+            <result property="expenseCount" column="expenseCount" jdbcType="BIGINT"/>
+            <result property="otherInfo" column="otherInfo" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,balance,
+        frozenAmount,score,expenseAmount,
+        expenseScore,expenseCount,otherInfo,
+        createTime,updateTime,isDelete
+    </sql>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.apihub.pay.mapper.PayOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.apihub.pay.model.entity.PayOrder">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="bizOrderNo" column="bizOrderNo" jdbcType="BIGINT"/>
+            <result property="payOrderNo" column="payOrderNo" jdbcType="BIGINT"/>
+            <result property="bizUserId" column="bizUserId" jdbcType="BIGINT"/>
+            <result property="payChannelCode" column="payChannelCode" jdbcType="VARCHAR"/>
+            <result property="amount" column="amount" jdbcType="INTEGER"/>
+            <result property="payType" column="payType" jdbcType="TINYINT"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="couponId" column="couponId" jdbcType="BIGINT"/>
+            <result property="expandJson" column="expandJson" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="resultCode" column="resultCode" jdbcType="VARCHAR"/>
+            <result property="resultMsg" column="resultMsg" jdbcType="VARCHAR"/>
+            <result property="paySuccessTime" column="paySuccessTime" jdbcType="TIMESTAMP"/>
+            <result property="payOverTime" column="payOverTime" jdbcType="TIMESTAMP"/>
+            <result property="qrCodeUrl" column="qrCodeUrl" jdbcType="VARCHAR"/>
+            <result property="creater" column="creater" jdbcType="BIGINT"/>
+            <result property="updater" column="updater" jdbcType="BIGINT"/>
+            <result property="isDelete" column="isDelete" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,bizOrderNo,payOrderNo,
+        bizUserId,payChannelCode,amount,
+        payType,status,couponId,
+        expandJson,createTime,updateTime,
+        resultCode,resultMsg,paySuccessTime,
+        payOverTime,qrCodeUrl,creater,
+        updater,isDelete
+    </sql>
+</mapper>
