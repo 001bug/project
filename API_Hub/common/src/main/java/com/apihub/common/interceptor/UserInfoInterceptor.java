@@ -23,6 +23,7 @@ public class UserInfoInterceptor implements HandlerInterceptor {
     }
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        //在请求回发后清楚ThreadLocal中的用户信息, 防止内存泄漏
         UserHolder.removeUser();
     }
 }

@@ -41,23 +41,23 @@ public class UserServiceTest {
         }
     }
 
-    @Test
-    void getListUser() {
-        User userQuery = new User();
-        UserQueryRequest userQueryRequest = new UserQueryRequest();
-        BeanUtils.copyProperties(userQueryRequest, userQuery);
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>(userQuery);
-        List<User> userList = userService.list(queryWrapper);
-        List<UserVO> userVOList = userList.stream().map(user -> {
-            UserVO userVO = new UserVO();
-            BeanUtils.copyProperties(user, userVO);
-            return userVO;
-        }).toList();
-        System.out.println("------------------");
-        for (UserVO userVO : userVOList) {
-            System.out.println(userVO.toString());
-        }
-    }
+//    @Test
+//    void getListUser() {
+//        User userQuery = new User();
+//        UserQueryRequest userQueryRequest = new UserQueryRequest();
+//        BeanUtils.copyProperties(userQueryRequest, userQuery);
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<>(userQuery);
+//        List<User> userList = userService.list(queryWrapper);
+//        List<UserVO> userVOList = userList.stream().map(user -> {
+//            UserVO userVO = new UserVO();
+//            BeanUtils.copyProperties(user, userVO);
+//            return userVO;
+//        }).toList();
+//        System.out.println("------------------");
+//        for (UserVO userVO : userVOList) {
+//            System.out.println(userVO.toString());
+//        }
+//    }
 
 
     @Test

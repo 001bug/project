@@ -88,7 +88,7 @@ public class AKGlobalFilter implements GlobalFilter, Ordered {
             Map<Object, Object> userMap = stringRedisTemplate.opsForHash().entries(API_ACCESS_KEY + accessKey);
             //secretKey校验
             String UserSecretKey = (String) userMap.get("secretKey");
-            String checkSign = ApiSignUtils.genSign(timestamp, UserSecretKey);
+            String checkSign = ApiSignUtils.genSign(timestamp, UserSecretKey);//哈希生成签名
             if (!Objects.equals(checkSign, secretSign)) throw new RuntimeException();
 
             //传递userId

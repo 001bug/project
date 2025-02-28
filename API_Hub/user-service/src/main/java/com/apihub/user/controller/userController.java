@@ -57,11 +57,11 @@ public class userController {
     @PostMapping("/login")
     public BaseResponse<UserLoginVO> login(@RequestBody LoginFormDTO loginFormDTO) {
         if (loginFormDTO == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);//抛出PARAMS_ERROR错误码
         }
         String userAccount = loginFormDTO.getUserAccount();
         String userPassword = loginFormDTO.getUserPassword();
-        if (StringUtils.isAnyBlank(userAccount, userPassword)) {
+        if (StringUtils.isAnyBlank(userAccount, userPassword)) {//password和Account是否为空值
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         UserLoginVO userLoginVo = userService.login(loginFormDTO);

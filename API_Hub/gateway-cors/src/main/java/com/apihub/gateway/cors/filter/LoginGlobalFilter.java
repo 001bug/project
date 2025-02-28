@@ -49,13 +49,13 @@ public class LoginGlobalFilter implements GlobalFilter, Ordered {
         List<String> headers = request.getHeaders().get("Authorization");
         if (!CollUtils.isEmpty(headers)) {
             token = headers.get(0);
-        } else {
+        } else {//没有token直接驳回
             token = null;
             ServerHttpResponse response = exchange.getResponse();
             response.setRawStatusCode(401);
             return response.setComplete();
         }
-        // 4.以token为key,从redis中获取用户id
+        // 4.以token为key,从redis中获取用户id(USER_TOKEN_KEY+token)可直接获得id
         String userIdInfo;
         try {
             userIdInfo = stringRedisTemplate.opsForValue().get(USER_TOKEN_KEY + token);
@@ -74,13 +74,13 @@ public class LoginGlobalFilter implements GlobalFilter, Ordered {
 
         ServerWebExchange ex = exchange.mutate()
                 .request(b -> b.header("userId-info", userIdInfo))
-                .build();
+                .build();//在表头添加userId-info字段
 
         // 放行
         return chain.filter(exchange);
     }
 
-    private boolean isExclude(String antPath) {
+    private boolean isExclude(String antPath) {//哪写请求不拦截
         for (String pathPattern : authProperties.getExcludePaths()) {
             if (antPathMatcher.match(pathPattern, antPath)) {
                 return true;

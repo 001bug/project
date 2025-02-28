@@ -158,13 +158,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //可以添加密码要求
 
         // 加密
-        String encryptPassword = DigestUtils.md5DigestAsHex((MD5_SALT + userPassword).getBytes());
+        String encryptPassword = DigestUtils.md5DigestAsHex((MD5_SALT + userPassword).getBytes());//md5加salt加密
 
         // 2. 查询用户是否存在
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userAccount", userAccount);
-        queryWrapper.eq("userPassword", encryptPassword);
-        User user = userMapper.selectOne(queryWrapper);
+        queryWrapper.eq("userPassword", encryptPassword);//这里可以加一个判断优化,如果没有该用户直接返回
+        User user = userMapper.selectOne(queryWrapper);//约等于sql: select * from user where .. and..
 
         return loginCommonMethod(user);
     }
@@ -176,18 +176,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
 
-        if (user.getUserRole().equals(BAN_ROLE)) {
+        if (user.getUserRole().equals(BAN_ROLE)) {//接口中的变量属性默认是static final修饰的
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "被封禁");
         }
 
         // 5.生成TOKEN
-        String token = jwtTool.createToken(user.getId(), jwtProperties.getTokenTTL());
+        String token = jwtTool.createToken(user.getId(), jwtProperties.getTokenTTL());//传入userid,tokenTTL
 
         // 6.封装VO
         UserLoginVO userLoginVo;
+        //新,复制用户信息,将user转换为UserLoginVo,屏蔽敏感信息
         userLoginVo = BeanUtil.copyProperties(user, UserLoginVO.class);
 
-        //在redis中，以accessKey为Key，存储sign
+        //在redis中，以accessKey为Key，存储sign(签名)
         String accessKey = user.getAccessKey();
         //秘钥加密
 //        Digester md5 = new Digester(DigestAlgorithm.SHA256);
@@ -202,15 +203,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                         .setFieldValueEditor((fieldName, fieldValue) -> fieldValue != null ? fieldValue.toString() : ""));
 
         String key = LOGIN_USER_KEY + user.getId();
-        //以userId为key存一份
+        //以userId为key存一份user的信息
         stringRedisTemplate.opsForHash().putAll(key, userMap);
-        // 7.4.设置token有效期
+        // 7.4.设置token有效期   用户信息存入 Redis 后，LOGIN_USER_TTL 分钟后自动删除（表示 Token 过期时间）。
         stringRedisTemplate.expire(key, LOGIN_USER_TTL, TimeUnit.MINUTES);
 
-        //以AK为key存一份(两个作用，存在的话就是刷新有效期，不存在的话就是补充)
+        //以accessKey作为key存一份(id和secreKey)(两个作用，存在的话就是刷新有效期，不存在的话就是补充)
         HashMap<String, Object> userAkInfo = new HashMap<>();
         userAkInfo.put("id", String.valueOf(user.getId()));
         userAkInfo.put("secretKey", user.getSecretKey());
+        //创建api访问密钥,在访问api时,使用accessKey身份验证
         stringRedisTemplate.opsForHash().putAll(API_ACCESS_KEY + accessKey, userAkInfo);
 
 

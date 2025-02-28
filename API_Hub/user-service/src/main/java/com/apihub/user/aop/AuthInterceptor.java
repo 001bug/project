@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Aspect
 @Component
-public class AuthInterceptor {
+public class AuthInterceptor {//使用的是spring的aop切面
 
     @Resource
     private UserService userService;
@@ -59,7 +59,7 @@ public class AuthInterceptor {
                 }
             }
         }
-        // 通过权限校验，放行
+        // 通过权限校验，放行(就是执行目标方法)
         return joinPoint.proceed();
     }
 

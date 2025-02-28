@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
+//监听nacos中的路由文件,实现动态路由
 @Component
 @RequiredArgsConstructor
 public class RouteConfigLoader {
@@ -26,7 +26,7 @@ public class RouteConfigLoader {
     private final RouteDefinitionWriter writer;
     private Set<String> routeIds = new HashSet<>();
 
-    @PostConstruct
+    @PostConstruct//初始化阶段执行这段代码
     public void initRouteConfiguration() throws NacosException {
         // 1.第一次启动时，拉取路由表，并且添加监听器
         String configInfo = configManager.getConfigService()
@@ -47,7 +47,7 @@ public class RouteConfigLoader {
     }
 
     private void updateRouteConfigInfo(String configInfo) {
-        // 1.解析路由信息
+        // 1.解析路由信息,将string转化成RouteDefinition
         List<RouteDefinition> routeDefinitions = JSONUtil.toList(configInfo, RouteDefinition.class);
         // 2.删除旧的路由
         for (String routeId : routeIds) {
