@@ -16,11 +16,19 @@ import static com.apihub.common.common.ErrorCode.NOT_LOGIN_ERROR;
 
 @Component
 public class JwtTool {
-    private final JWTSigner jwtSigner;
+    private final JWTSigner jwtSigner;// 签名器
 
+    /**
+     * 构造函数，初始化JWT工具类。
+     *
+     * @param keyPair 用于生成和验证JWT的密钥对
+     */
     public JwtTool(KeyPair keyPair) {
+
+        // 使用密钥对创建JWT签名器，指定签名算法为"rs256"
         this.jwtSigner = JWTSignerUtil.createSigner("rs256", keyPair);
     }
+
 
     /**
      * 创建 access-token
@@ -30,8 +38,8 @@ public class JwtTool {
         return JWT.create()
                 .setPayload("userId", userId)
                 .setExpiresAt(new Date(System.currentTimeMillis() + 36000 * 1000))
-                .setSigner(jwtSigner)
-                .sign();
+                .setSigner(jwtSigner)// 设置签名
+                .sign();// 生成jwt(签名)
     }
 
     /**
