@@ -23,7 +23,7 @@ public class JwtTool {
      *
      * @param keyPair 用于生成和验证JWT的密钥对
      */
-    public JwtTool(KeyPair keyPair) {
+    public JwtTool(KeyPair keyPair) {//KeyPair有公钥私钥,私钥用于签名,公钥用于验证
 
         // 使用密钥对创建JWT签名器，指定签名算法为"rs256"
         this.jwtSigner = JWTSignerUtil.createSigner("rs256", keyPair);

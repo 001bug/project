@@ -13,10 +13,18 @@ import java.security.KeyPair;
 @EnableConfigurationProperties(JwtProperties.class)
 public class SecurityConfig {
 
+    /**
+     * 配置一个密码编码器（PasswordEncoder）的Bean。
+     * 该Bean使用BCrypt算法对密码进行编码，以增强安全性。
+     *
+     * @return 返回一个BCryptPasswordEncoder实例
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
+        // 创建并返回一个BCryptPasswordEncoder实例
         return new BCryptPasswordEncoder();
     }
+
 
     @Bean
     public KeyPair keyPair(JwtProperties properties){
