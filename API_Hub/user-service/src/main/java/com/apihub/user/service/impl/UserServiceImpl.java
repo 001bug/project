@@ -152,7 +152,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public UserLoginVO login(LoginFormDTO loginFormDTO) {
-        // 1.数据校验
+
         String userAccount = loginFormDTO.getUserAccount();
         String userPassword = loginFormDTO.getUserPassword();
         //可以添加密码要求

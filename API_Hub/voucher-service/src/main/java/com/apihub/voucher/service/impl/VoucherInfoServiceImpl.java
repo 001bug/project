@@ -50,14 +50,23 @@ public class VoucherInfoServiceImpl extends ServiceImpl<VoucherInfoMapper, Vouch
     //仅普通优惠券信息添加
     @Override
     public void saveCommonVoucherInfo(VoucherInfoAddRequest voucherInfoAddRequest, HttpServletRequest request) {
+        // 检查优惠券类型是否为普通优惠券类型
         if (!Objects.equals(voucherInfoAddRequest.getType(), TYPE_BALANCE)
                 && !Objects.equals(voucherInfoAddRequest.getType(), TYPE_INTERFACE)) {
+            // 如果不是普通优惠券类型，抛出业务异常
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "不是普通优惠券类型");
         }
+
+        // 创建一个新的VoucherInfoAdd对象
         VoucherInfoAdd voucherInfoAdd = new VoucherInfoAdd();
+
+        // 将请求对象中的属性复制到VoucherInfoAdd对象中
         BeanUtils.copyProperties(voucherInfoAddRequest, voucherInfoAdd);
+
+        // 保存优惠券信息
         saveVoucherInfo(voucherInfoAdd);
     }
+
 
     //包含普通优惠券和秒杀优惠券的信息添加
     private String saveVoucherInfo(VoucherInfoAdd voucherInfoAdd) {

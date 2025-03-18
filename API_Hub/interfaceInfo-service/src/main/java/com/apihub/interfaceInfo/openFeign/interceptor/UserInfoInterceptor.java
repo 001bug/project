@@ -3,7 +3,7 @@ package com.apihub.interfaceInfo.openFeign.interceptor;
 import com.apihub.common.utils.UserHolder;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-
+//openfeign发送请求时，自动添加header
 public class UserInfoInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {

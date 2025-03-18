@@ -20,10 +20,12 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,15 +57,18 @@ public class userController {
 
     @ApiOperation("用户名登录")
     @PostMapping("/login")
-    public BaseResponse<UserLoginVO> login(@RequestBody LoginFormDTO loginFormDTO) {
+    public BaseResponse<UserLoginVO> login(@Valid @RequestBody LoginFormDTO loginFormDTO, BindingResult bindingResult) {
         if (loginFormDTO == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);//抛出PARAMS_ERROR错误码
         }
-        String userAccount = loginFormDTO.getUserAccount();
-        String userPassword = loginFormDTO.getUserPassword();
-        if (StringUtils.isAnyBlank(userAccount, userPassword)) {//password和Account是否为空值
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        if(bindingResult.hasErrors()){
+            throw new BusinessException(PARAMS_ERROR);
         }
+//        String userAccount = loginFormDTO.getUserAccount();
+//        String userPassword = loginFormDTO.getUserPassword();
+//        if (StringUtils.isAnyBlank(userAccount, userPassword)) {//password和Account是否为空值
+//            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+//        }
         UserLoginVO userLoginVo = userService.login(loginFormDTO);
         return ResultUtils.success(userLoginVo);
     }
